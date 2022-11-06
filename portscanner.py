@@ -3,7 +3,8 @@ import threading
 import queue
 
 q = queue.Queue()
-
+#target = '10.0.0.230'
+#ports = 65000
 target = input('Target: ')
 ports = input('Max number of ports: ')
 
