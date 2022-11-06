@@ -1,15 +1,28 @@
+import queue
 import socket
 import threading
-import queue
 
 q = queue.Queue()
-#target = '10.0.0.230'
-#ports = 65000
-target = input('Target: ')
-ports = input('Max number of ports: ')
 
-for x in range(1,int(ports)):
-    q.put(x)
+list = []
+user = ''
+mode = input('Range or list(r or l): ')
+target = input('Target: ')
+
+if mode == 'r':
+    ports = input('Max number of ports: ')
+    for x in range(1,int(ports)):
+        q.put(x)
+    
+elif mode == 'l':
+    while user != 'q':
+        user = input('Enter port: ') 
+        list.append(user)
+    list.pop()     
+    
+    for x in list:
+        q.put(x) 
+    
 
 def Pscan(port):
     try:
@@ -28,8 +41,8 @@ def worker():
         elif q.empty():
             break
 
-        #else:
-         #   print('Port {} closed' .format(port))
+        else:
+            print('Port {} closed' .format(port))
 
 for x in range(30):
     t = threading.Thread(target=worker)
