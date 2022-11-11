@@ -41,9 +41,6 @@ def worker():
         elif q.empty():
             break
 
-        else:
-            print('Port {} closed' .format(port))
-
 for x in range(30):
     t = threading.Thread(target=worker)
     t.start()
