@@ -1,5 +1,7 @@
 import sqlite3
+import colorama
 
+color = colorama.Fore
 conn = sqlite3.connect('mydata.db')
 c = conn.cursor()
 
@@ -28,12 +30,12 @@ class member():
 
     def remove(self):
         c.execute('DELETE FROM {} WHERE id = {}' .format(self.table, self.id))
-        print('{} {} was removed from family' .format(self.first, self.last))
+        print(color.RED + '{} {} was removed from family' .format(self.first, self.last))
         member.count -= 1
         conn.commit()
 
     def print_count(self):
-        print('Number of people in family: {}' .format(member.count))
+        print(color.BLUE + 'Number of people in family: {}' .format(member.count))
 
 
 class dish():
@@ -62,13 +64,13 @@ class dish():
         c.execute('DELETE FROM dishes_for_thanksgiving WHERE id={}' .format(self.dish_id))
         try:
             del dish.dishes[self.person]
-            print('{} made by {} was removed' .format(self.dish, self.person))
+            print(color.RED + '{} made by {} was removed' .format(self.dish, self.person))
         except KeyError:
             print('Person not found')
         conn.commit()
 
     def print_dishes(self):
-        print('-----This is a list of dishes for Thanksgiving-----')
+        print(color.BLUE + '-----This is a list of dishes for Thanksgiving-----')
         for x, y in dish.dishes.items():
             print(x,':', y)
-        print('---------------------------------------------------')
+        print(color.BLUE + '---------------------------------------------------')
